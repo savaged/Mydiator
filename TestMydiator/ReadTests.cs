@@ -13,4 +13,13 @@ public sealed class ReadTests
         Assert.IsNotNull(people);
         Assert.IsTrue(people.Count > 0);
     }
+
+    [TestMethodDI]
+    public async Task TestGetPersonByIdQuery(ISender sender)
+    {
+        const int id = 2;
+        var person = await sender.Send(new GetPersonByIdQuery(id));
+        Assert.IsNotNull(person);
+        Assert.IsTrue(person.Id == id);
+    }
 }

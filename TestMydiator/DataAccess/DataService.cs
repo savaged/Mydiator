@@ -21,6 +21,14 @@ public class DataService : IDataService
         return _people as List<TModel> ?? new();
     }
 
+    public TModel? GetById<TModel>(int id) where TModel : IModel
+    {
+        // TODO change to switch pattern for other types of model
+        if (_people.FirstOrDefault(m => m.Id == id) is TModel model)
+            return model;
+        return default;
+    }
+
     public TModel Create<TModel>(TModel model) where TModel : IModel
     {
         // TODO change to switch pattern for other types of model
