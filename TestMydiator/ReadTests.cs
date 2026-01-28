@@ -7,18 +7,18 @@ namespace TestMydiator;
 public sealed class ReadTests
 {
     [TestMethodDI]
-    public async Task TestGetPersonListQuery(IMediator sender)
+    public async Task TestGetPersonListQuery(IMediator mediator)
     {
-        var people = await sender.Send(new GetPersonListQuery());
+        var people = await mediator.Send(new GetPersonListQuery());
         Assert.IsNotNull(people);
         Assert.IsTrue(people.Count > 0);
     }
 
     [TestMethodDI]
-    public async Task TestGetPersonByIdQuery(IMediator sender)
+    public async Task TestGetPersonByIdQuery(IMediator mediator)
     {
         const int id = 2;
-        var person = await sender.Send(new GetPersonByIdQuery(id));
+        var person = await mediator.Send(new GetPersonByIdQuery(id));
         Assert.IsNotNull(person);
         Assert.AreEqual(person.Id, id);
     }
