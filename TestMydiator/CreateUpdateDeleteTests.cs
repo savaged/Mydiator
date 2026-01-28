@@ -1,10 +1,20 @@
-﻿namespace TestMydiator;
+﻿using Mydiator;
+using TestMydiator.Commands;
+using TestMydiator.Models;
+
+namespace TestMydiator;
 
 [TestClass]
 public sealed class CreateUpdateDeleteTests
 {
     [TestMethodDI]
-    public void TestMethod1()
+    public async Task TestCreatePersonCommand(ISender sender)
     {
+        const string firstname = "Anne";
+        const string lastname = "Other";
+        var person = await sender.Send(new CreatePersonCommand(firstname, lastname));
+        Assert.IsNotNull(person);
+        Assert.AreEqual(firstname, person.Firstname);
+        Assert.AreEqual(lastname, person.Lastname);
     }
 }

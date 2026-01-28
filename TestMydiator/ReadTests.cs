@@ -20,6 +20,6 @@ public sealed class ReadTests
         const int id = 2;
         var person = await sender.Send(new GetPersonByIdQuery(id));
         Assert.IsNotNull(person);
-        Assert.IsTrue(person.Id == id);
+        Assert.AreEqual(person.Id, id);
     }
 }
