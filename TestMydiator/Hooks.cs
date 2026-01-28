@@ -14,10 +14,18 @@ public class Hooks
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IDataService, DataService>();
-        serviceCollection.AddMydiator(typeof(MydiatorEntryPoint).Assembly);
-        ServiceProvider = serviceCollection.BuildServiceProvider();
+        serviceCollection.AddMydiator();
+        ServiceProvider = serviceCollection.BuildServiceProvider(new ServiceProviderOptions
+        {
+            ValidateScopes = true,
+            ValidateOnBuild = true
+        });
     }
 
     [AssemblyCleanup]
-    public static void AssemblyCleanup() => ServiceProvider?.Dispose();
+    public static void AssemblyCleanup()
+    {
+        ServiceProvider?.Dispose();
+        ServiceProvider = null;
+    }
 }

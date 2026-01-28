@@ -23,4 +23,8 @@
         <ProjectReference Include="..\Mydiator\Mydiator.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Commands\" />
+    </ItemGroup>
+
 </Project>
