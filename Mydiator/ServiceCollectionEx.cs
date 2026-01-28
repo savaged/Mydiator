@@ -5,7 +5,7 @@ namespace Mydiator;
 
 public static class ServiceCollectionEx
 {
-    public static IServiceCollection AddMyMediator(this IServiceCollection services, Assembly? assembly = null)
+    public static IServiceCollection AddMydiator(this IServiceCollection services, Assembly? assembly = null)
     {
         ArgumentNullException.ThrowIfNull(services);
 
