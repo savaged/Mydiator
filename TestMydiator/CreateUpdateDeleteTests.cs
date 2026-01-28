@@ -8,7 +8,7 @@ namespace TestMydiator;
 public sealed class CreateUpdateDeleteTests
 {
     [TestMethodDI]
-    public async Task TestCreatePersonCommand(ISender sender)
+    public async Task TestCreatePersonCommand(IMediator sender)
     {
         const string firstname = "Anne";
         const string lastname = "Other";

@@ -11,7 +11,7 @@ public static class ServiceCollectionEx
 
         assembly ??= Assembly.GetCallingAssembly();
 
-        services.AddScoped<ISender, Sender>();
+        services.AddScoped<IMediator, Mediator>();
 
         var handlerInterfaceType = typeof(IRequestHandler<,>);
 

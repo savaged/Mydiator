@@ -2,7 +2,7 @@
 
 namespace Mydiator;
 
-public class Sender(IServiceProvider provider) : ISender
+public class Mediator(IServiceProvider provider) : IMediator
 {
     public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
     {

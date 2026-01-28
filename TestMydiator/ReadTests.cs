@@ -7,7 +7,7 @@ namespace TestMydiator;
 public sealed class ReadTests
 {
     [TestMethodDI]
-    public async Task TestGetPersonListQuery(ISender sender)
+    public async Task TestGetPersonListQuery(IMediator sender)
     {
         var people = await sender.Send(new GetPersonListQuery());
         Assert.IsNotNull(people);
@@ -15,7 +15,7 @@ public sealed class ReadTests
     }
 
     [TestMethodDI]
-    public async Task TestGetPersonByIdQuery(ISender sender)
+    public async Task TestGetPersonByIdQuery(IMediator sender)
     {
         const int id = 2;
         var person = await sender.Send(new GetPersonByIdQuery(id));
