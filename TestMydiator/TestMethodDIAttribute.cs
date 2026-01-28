@@ -7,7 +7,8 @@ public sealed class TestMethodDIAttribute : TestMethodAttribute
 {
     public override TestResult[] Execute(ITestMethod testMethod)
     {
-        var parameters = testMethod?.MethodInfo?.GetParameters();
+        ArgumentNullException.ThrowIfNull(testMethod);
+        var parameters = testMethod.MethodInfo?.GetParameters();
         var nParameters = parameters?.Length ?? 0;
 
         if (nParameters != 0)
@@ -32,7 +33,6 @@ public sealed class TestMethodDIAttribute : TestMethodAttribute
             var result = testMethod.Invoke(injectedArgs);
             return [result];
         }
-        else
-            return base.Execute(testMethod);
+        return base.Execute(testMethod);
     }
 }

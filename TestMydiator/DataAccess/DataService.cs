@@ -5,7 +5,7 @@ namespace TestMydiator.DataAccess;
 public class DataService : IDataService
 {
     // TODO add other model types
-    private readonly List<PersonModel> _people = new();
+    private readonly List<PersonModel> _people = [];
 
     public DataService()
     {
@@ -18,15 +18,15 @@ public class DataService : IDataService
     public List<TModel> GetAll<TModel>() where TModel : IModel
     {
         // TODO change to switch pattern for other types of model
-        return _people as List<TModel> ?? new();
+        return _people as List<TModel> ?? [];
     }
 
-    public TModel? GetById<TModel>(int id) where TModel : IModel
+    public TModel GetById<TModel>(int id) where TModel : IModel, new()
     {
         // TODO change to switch pattern for other types of model
         if (_people.FirstOrDefault(m => m.Id == id) is TModel model)
             return model;
-        return default;
+        return new TModel();
     }
 
     public TModel Create<TModel>(TModel model) where TModel : IModel
