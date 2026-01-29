@@ -15,6 +15,6 @@ public class GetPersonByIdHandler : IRequestHandler<GetPersonByIdQuery, PersonMo
         _dataService = dataService;
     }
 
-    public Task<PersonModel> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken) =>
-        Task.FromResult(_dataService.GetById<PersonModel>(request.Id));
+    public async Task<PersonModel> Handle(GetPersonByIdQuery request, CancellationToken cancellationToken) =>
+        await _dataService.GetById<PersonModel>(request.Id);
 }

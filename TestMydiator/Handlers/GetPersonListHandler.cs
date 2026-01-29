@@ -15,6 +15,6 @@ public class GetPersonListHandler : IRequestHandler<GetPersonListQuery, List<Per
         _dataService = dataService;
     }
 
-    public Task<List<PersonModel>> Handle(GetPersonListQuery request, CancellationToken cancellationToken) =>
-        Task.FromResult(_dataService.GetAll<PersonModel>());
+    public async Task<List<PersonModel>> Handle(GetPersonListQuery request, CancellationToken cancellationToken) =>
+        await _dataService.GetAll<PersonModel>();
 }

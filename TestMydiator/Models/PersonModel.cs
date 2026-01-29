@@ -1,8 +1,8 @@
 ﻿namespace TestMydiator.Models;
 
-public class PersonModel : IModel
+public struct PersonModel(int id = 0, string firstname = "", string lastname = "") : IModel
 {
-    public int Id { get; set; }
-    public string Firstname { get; set; } = string.Empty;
-    public string Lastname { get; set; } = string.Empty;
+    public int Id { get; set; } = id;
+    public string Firstname { get; } = firstname;
+    public string Lastname { get; } = lastname;
 }

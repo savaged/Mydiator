@@ -4,10 +4,14 @@ namespace TestMydiator.DataAccess;
 
 public interface IDataService
 {
-    List<TModel> GetAll<TModel>() where TModel : IModel;
+    Task<List<TModel>> GetAll<TModel>() where TModel : IModel;
 
-    TModel GetById<TModel>(int id) where TModel : IModel, new();
+    Task<TModel> GetById<TModel>(int id) where TModel : IModel, new();
 
-    TModel Create<TModel>(TModel model) where TModel : IModel;
+    Task<TModel> Create<TModel>(TModel model) where TModel : IModel;
+
+    Task<TModel> Update<TModel>(TModel model) where TModel : IModel;
+
+    Task<bool> Delete<TModel>(int id) where TModel : IModel;
 
 }

@@ -9,35 +9,63 @@ public class DataService : IDataService
 
     public DataService()
     {
-        _people.Add(new PersonModel { Id = 1, Firstname = "Tim", Lastname = "Corey" });
-        _people.Add(new PersonModel { Id = 2, Firstname = "Bob", Lastname = "Smith" });
-        _people.Add(new PersonModel { Id = 3, Firstname = "Alice", Lastname = "Brown" });
+        _people.Add(new PersonModel(1, "Tim", "Corey"));
+        _people.Add(new PersonModel(2, "Bob", "Smith"));
+        _people.Add(new PersonModel(3, "Alice", "Brown"));
         // TODO add other model types
     }
 
-    public List<TModel> GetAll<TModel>() where TModel : IModel
+    public async Task<List<TModel>> GetAll<TModel>() where TModel : IModel
     {
+        await SimulateAsync();
         // TODO change to switch pattern for other types of model
-        return _people as List<TModel> ?? [];
+        var result = _people as List<TModel> ?? [];
+        return result;
     }
 
-    public TModel GetById<TModel>(int id) where TModel : IModel, new()
+    public async Task<TModel> GetById<TModel>(int id) where TModel : IModel, new()
     {
+        await SimulateAsync();
         // TODO change to switch pattern for other types of model
         if (_people.FirstOrDefault(m => m.Id == id) is TModel model)
             return model;
         return new TModel();
     }
 
-    public TModel Create<TModel>(TModel model) where TModel : IModel
+    public async Task<TModel> Create<TModel>(TModel model) where TModel : IModel
     {
+        await SimulateAsync();
         // TODO change to switch pattern for other types of model
         if (model is PersonModel person)
         {
-            person.Id = _people.Count + 1;
+            model.Id = person.Id = _people.Count + 1;
             _people.Add(person);
         }
         return model;
     }
+
+    public async Task<TModel> Update<TModel>(TModel model) where TModel : IModel
+    {
+        await SimulateAsync();
+        // TODO change to switch pattern for other types of model
+        var match = _people.FirstOrDefault(m => m.Id == model.Id);
+        if (match is PersonModel person)
+        {
+            _people.Remove(match);
+            _people.Add(person);
+        }
+        return model;
+    }
+
+    public async Task<bool> Delete<TModel>(int id) where TModel : IModel
+    {
+        await SimulateAsync();
+        var match = _people.FirstOrDefault(m => m.Id == id);
+        if (match is PersonModel person)
+            _people.Remove(match);
+        return true;
+    }
+
+    private static async Task SimulateAsync() => await Task.CompletedTask;
 
 }

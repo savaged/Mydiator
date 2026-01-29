@@ -20,6 +20,8 @@ public sealed class ReadTests
         const int id = 2;
         var person = await mediator.Send(new GetPersonByIdQuery(id));
         Assert.IsNotNull(person);
-        Assert.AreEqual(person.Id, id);
+        Assert.AreEqual(id, person.Id);
     }
+
+    public TestContext? TestContext { get; set; }
 }

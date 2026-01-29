@@ -2,7 +2,6 @@ using Mydiator;
 using TestMydiator.Commands;
 using TestMydiator.DataAccess;
 using TestMydiator.Models;
-using TestMydiator.Queries;
 
 namespace TestMydiator.Handlers;
 
@@ -16,11 +15,6 @@ public class CreatePersonHandler : IRequestHandler<CreatePersonCommand, PersonMo
         _dataService = dataService;
     }
 
-    public Task<PersonModel> Handle(CreatePersonCommand request, CancellationToken cancellationToken) =>
-        Task.FromResult(_dataService.Create<PersonModel>(
-            new PersonModel
-            {
-                Firstname = request.Firstname,
-                Lastname = request.Lastname
-            }));
+    public async Task<PersonModel> Handle(CreatePersonCommand request, CancellationToken cancellationToken) =>
+        await _dataService.Create(new PersonModel(firstname: request.Firstname, lastname: request.Lastname));
 }
